@@ -3,14 +3,19 @@ using System.Reflection;
 using System.Xml;
 using HarmonyLib;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class FontReplacer : IModApi
 {
-    public static bool loaded = false;
     public static string modFullPath;
 
+    public static bool loaded = false;
     public static string fontBundlePath;
     public static string fontName;
+
+    public static bool loaded2 = false;
+    public static string consoleFontBundlePath;
+    public static string consoleFontName;
 
     public void InitMod(Mod mod)
     {
@@ -47,10 +52,20 @@ public class FontReplacer : IModApi
                     XmlNode nameNode = xnode.Attributes.GetNamedItem("Name");
                     fontName = nameNode?.Value?.ToString();
                 }
+
+                if (xnode.Name == "ConsoleFont")
+                {
+                    XmlNode bundlePathNode = xnode.Attributes.GetNamedItem("BundlePath");
+                    consoleFontBundlePath = bundlePathNode?.Value?.ToString();
+
+                    XmlNode nameNode = xnode.Attributes.GetNamedItem("Name");
+                    consoleFontName = nameNode?.Value?.ToString();
+                }
             }
         }
 
         loaded = fontBundlePath != null && fontName != null;
+        loaded2 = consoleFontBundlePath != null && consoleFontName != null;
     }
 
     [HarmonyPatch(typeof(XUi), nameof(XUi.GetUIFontByName))]
@@ -82,6 +97,39 @@ public class FontReplacer : IModApi
                 {
                     __result.dynamicFont = newFont;
                 }
+            }
+
+            return __result;
+        }
+    }
+
+    [HarmonyPatch(typeof(GUIWindowConsole), "AllocText")]
+    public class ReplaceConsoleFont
+    {
+        private static Font newFont;
+
+        public static Text Postfix(Text __result)
+        {
+            if (!loaded2) return __result;
+
+            if (newFont == null)
+            {
+                string fullBundlePath = modFullPath + "/" + consoleFontBundlePath;
+
+                if (!File.Exists(fullBundlePath))
+                {
+                    Log.Error("[Font Replacement] File '" + consoleFontBundlePath + "' not found in mod folder!");
+                    loaded2 = false;
+                    return __result;
+                }
+
+                Log.Out("[Font Replacement] Loading console replacement font '" + consoleFontName + "' from '" + fullBundlePath + "'");
+                newFont = DataLoader.LoadAsset<Font>("#" + fullBundlePath + "?" + consoleFontName);
+            }
+
+            if (__result != null && __result.font != newFont)
+            {
+                __result.font = newFont;
             }
 
             return __result;

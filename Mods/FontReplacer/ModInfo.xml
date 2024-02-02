@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <xml>
-	<Name value="FontReplacer" />
-	<DisplayName value="Font Replacer" />
-	<Description value="Replaces the game font in runtime" />
-	<Author value="YuRaNnNzZZ" />
-	<Version value="1.0.0" />
+	<ModInfo>
+		<Name value="FontReplacer" />
+		<Description value="Replaces the game font in runtime" />
+		<Author value="YuRaNnNzZZ" />
+		<Version value="1.0.0" />
+	</ModInfo>
 </xml>

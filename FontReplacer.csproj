@@ -45,9 +45,11 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\Managed\LogLibrary.dll</HintPath>
     </Reference>
+    <Reference Include="NGUI, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL" />
     <Reference Include="System" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Xml" />
+    <Reference Include="Unity.Addressables, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL" />
     <Reference Include="UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\Managed\UnityEngine.CoreModule.dll</HintPath>

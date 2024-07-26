@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <xml>
 	<Font BundlePath="Resources/PTSansNarrowFont.unity3d" Name="PT_Sans-Narrow-Web-Regular" />
-	<!-- <ConsoleFont BundlePath="Resources/Monocraft.unity3d" Name="Monocraft" /> -->
+	<ConsoleFont BundlePath="Resources/Monocraft.unity3d" Name="Monocraft" />
 </xml>

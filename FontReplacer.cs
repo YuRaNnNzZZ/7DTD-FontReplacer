@@ -64,23 +64,43 @@ public class FontReplacer : IModApi
 
     private Font TryParseAndLoadFont(XmlNode xnode)
     {
-        XmlNode bundlePathNode = xnode.Attributes.GetNamedItem("BundlePath");
-        string fontBundlePath = bundlePathNode?.Value?.ToString();
-
-        XmlNode nameNode = xnode.Attributes.GetNamedItem("Name");
-        string fontName = nameNode?.Value?.ToString();
-
-        string fullBundlePath = modFullPath + "/" + fontBundlePath;
-
-        if (!File.Exists(fullBundlePath))
+        XmlNode familyNode = xnode.Attributes.GetNamedItem("OSFont");
+        if (familyNode != null)
         {
-            Log.Error("[Font Replacement][" + xnode.Name + "] File '" + fontBundlePath + "' not found in mod folder!");
+            string familyName = familyNode?.Value?.ToString();
 
-            return null;
+            Log.Out("[Font Replacement][" + xnode.Name + "] Loading replacement font '" + familyName + "' from OS.");
+            Font font = Font.CreateDynamicFontFromOSFont(familyName, 90);
+            if (font != null) Log.Out("[Font Replacement][" + xnode.Name + "] Loaded font '" + font.name + "'");
+
+            return font;
         }
 
-        Log.Out("[Font Replacement][" + xnode.Name + "] Loading replacement font '" + fontName + "' from '" + fullBundlePath + "'");
-        return DataLoader.LoadAsset<Font>("#" + fullBundlePath + "?" + fontName);
+        XmlNode bundlePathNode = xnode.Attributes.GetNamedItem("BundlePath");
+        if (bundlePathNode != null)
+        {
+            string fontBundlePath = bundlePathNode?.Value?.ToString();
+
+            XmlNode nameNode = xnode.Attributes.GetNamedItem("Name");
+            string fontName = nameNode?.Value?.ToString();
+
+            string fullBundlePath = modFullPath + "/" + fontBundlePath;
+
+            if (!File.Exists(fullBundlePath))
+            {
+                Log.Error("[Font Replacement][" + xnode.Name + "] File '" + fontBundlePath + "' not found in mod folder!");
+
+                return null;
+            }
+
+            Log.Out("[Font Replacement][" + xnode.Name + "] Loading replacement font '" + fontName + "' from '" + fullBundlePath + "'");
+            Font font = DataLoader.LoadAsset<Font>("#" + fullBundlePath + "?" + fontName);
+            if (font != null) Log.Out("[Font Replacement][" + xnode.Name + "] Loaded font '" + font.name + "'");
+
+            return font;
+        }
+
+        return null;
     }
 
     [HarmonyPatch(typeof(XUi), nameof(XUi.GetUIFontByName))]

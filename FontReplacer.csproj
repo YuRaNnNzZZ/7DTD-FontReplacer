@@ -35,31 +35,49 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="0Harmony, Version=2.3.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <Private>false</Private>
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\Managed\0Harmony.dll</HintPath>
     </Reference>
     <Reference Include="Assembly-CSharp, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <Private>false</Private>
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\Managed\Assembly-CSharp.dll</HintPath>
     </Reference>
     <Reference Include="LogLibrary, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <Private>false</Private>
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\Managed\LogLibrary.dll</HintPath>
     </Reference>
-    <Reference Include="NGUI, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL" />
-    <Reference Include="System" />
-    <Reference Include="Microsoft.CSharp" />
-    <Reference Include="System.Xml" />
-    <Reference Include="Unity.Addressables, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL" />
+    <Reference Include="NGUI, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="System">
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="Microsoft.CSharp">
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="System.Xml">
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="Unity.Addressables, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <Private>false</Private>
+      <Private>false</Private>
+    </Reference>
     <Reference Include="UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null">
+      <Private>false</Private>
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\Managed\UnityEngine.CoreModule.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.TextRenderingModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null">
+      <Private>false</Private>
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\Managed\UnityEngine.TextRenderingModule.dll</HintPath>
     </Reference>
-    <Reference Include="UnityEngine.UI, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL" />
+    <Reference Include="UnityEngine.UI, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <Private>false</Private>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="FontReplacer.cs" />
